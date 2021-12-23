@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Customer;
+use App\Models\User;
+;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+
 
 class AuthenticateController extends Controller
 {
@@ -20,7 +22,7 @@ class AuthenticateController extends Controller
         $validated = Validator::make($request->all(), [
             "name" => "required|string|max:20",
             "address"=> "required",
-            "email" => "required|email|unique:customers,email",
+            "email" => "required|email|unique:users,email",
             "password" => "required|string|min:6"
         ]); 
 
@@ -28,11 +30,14 @@ class AuthenticateController extends Controller
             return response()->json(['errors' => $validated->errors()], 422);
         }
 
-        $customer = new Customer();
+        $customer = new User();
         $customer->name = $request->name;
         $customer->email = $request->email;
         $customer->address = $request->address;
         $customer->phone = $request->phone;
+        $customer->type_client = $request->type_client;
+        $customer->duree_contrat = $request-> duree_contrat;
+        $customer->echeance = $request-> echeance;
         $customer->password = bcrypt($request->password);
         $customer->save();
 
@@ -41,7 +46,7 @@ class AuthenticateController extends Controller
             'token' => $customer->createToken('tokens')->plainTextToken
         ]);
     }
-
+    
     public function signin(Request $request) {
         $validated = Validator::make($request->all(), [
             "email" => "required|email",

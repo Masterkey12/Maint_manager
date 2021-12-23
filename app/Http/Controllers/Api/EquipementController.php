@@ -123,9 +123,9 @@ class EquipementController extends Controller
      * @param  \App\Equipement  $equipement
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Equipement $equipement)
+    public function destroy(Equipement $equipement,$id)
     {
-        $equipement->delete();
+        $equipement->findOrFail($id)->delete();
         return response()->json(null, 204);
     }
 }

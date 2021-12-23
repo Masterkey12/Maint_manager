@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Customer;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -26,7 +26,7 @@ class CustomerController extends Controller
      */
     public function index(Request $request)
     {
-        return Customer::all();
+        return User::all();
     }
 
     /**
@@ -45,15 +45,15 @@ class CustomerController extends Controller
             'duree_contrat' => 'required',
             'echeance' => 'required',
             'address' => 'required',
-            'email' => 'required|email|unique:customers,email',
-            'password' => 'required|min:6|confirmed'
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:6|'
         ]);
 
         if ($validated->fails()) {
             return response()->json([$validated->errors()], 422);
         }
 
-        $newCustomer = Customer ::create($request->all());
+        $newCustomer = User::create($request->all());
         return response()->json($newCustomer, 201);
     }
 
@@ -63,9 +63,9 @@ class CustomerController extends Controller
      * @param  String $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Customer $customer, $id)
+    public function show(User $user, $id)
     {
-        return Customer::find($id);
+        return User::find($id);
     }
 
 
@@ -102,9 +102,9 @@ class CustomerController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Customer $customer)
+    public function destroy(Customer $customer,$id)
     {
-        $customer->delete();
+        $customer->findOrFail($id)->delete();
         return response()->json(null, 204);
     }
 }
