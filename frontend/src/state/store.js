@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import customer from './modules/customer'
+import equipment from './modules/equipment'
 import user from './modules/user'
 
 import modules from './modules'
@@ -11,6 +12,7 @@ const store = new Vuex.Store({
     modules: {
         ...modules,
         customer,
+        equipment,
         user
     },
     // Enable strict mode in development to get a warning

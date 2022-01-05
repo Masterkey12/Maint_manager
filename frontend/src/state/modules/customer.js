@@ -55,8 +55,8 @@ const actions = {
                 return false
             })
 
-        if (res.status === 201) {
-            commit('UPDATE_CUSTOMER', res.data)
+        if (res.status === 200) {
+            commit('UPDATE_CUSTOMER', res.data.customer)
             return true
         }
     },

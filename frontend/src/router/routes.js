@@ -54,6 +54,25 @@ export default [{
         component: () =>
             import ('./views/users/profile'),
     },
+
+    {
+        path: '/equipments/create',
+        name: 'CreateEquipment',
+        meta: {
+            authRequired: true,
+        },
+        component: () =>
+            import ('./views/equipments/Create'),
+    },
+    {
+        path: '/equipments',
+        name: 'Equipments',
+        meta: {
+            authRequired: true,
+        },
+        component: () =>
+            import ('./views/equipments/Index.vue'),
+    },
     {
         path: '/user/reset-password',
         name: 'ResetPassword',

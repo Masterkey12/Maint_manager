@@ -35,13 +35,13 @@ export const menuItems = [{
         subItems: [{
                 id: 1,
                 label: "menuitems.equipement.list.create",
-                link: "/customers/create",
+                link: "/equipments/create",
                 parentId: 3
             },
             {
                 id: 2,
                 label: "menuitems.equipement.list.list",
-                link: "/customers",
+                link: "/equipments",
                 parentId: 3
             }
         ]

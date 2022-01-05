@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 class Equipement extends Model
-{
+{   
     protected $fillable = [
         "designation",
         "marque",
-        "modele" ,
+        "modele",
         "fabricant",
         "capacite",
         "customer_id",

@@ -20,8 +20,6 @@ class Equipements extends Migration
             $table->string('modele');
             $table->string('fabricant');
             $table->string('capacite');
-            $table->foreignId('customer_id');
-            $table->foreign('customer_id')->references('id')->on('customers'); 
             $table->string('affectation');
             $table->string('situation_actuelle');
             $table->date('derniere_intervention');

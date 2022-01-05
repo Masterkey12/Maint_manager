@@ -57,7 +57,7 @@
             }
         },
         "equipement": {
-            "text": "Equipement",
+            "text": "Equipements",
             "list": {
                 "list": "List",
                 "create": "Create"

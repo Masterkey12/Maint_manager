@@ -59,7 +59,20 @@
                 <p class="mt-2">
                     The list of computers is empty, no computer has been added yet.
                 </p>                 
-              </div>                              
+              </div>  
+                <div class="row mb-4">
+                <div class="col-md-12">
+                  <div class="text-center">
+                    <jw-pagination
+                      :pageSize="pageSize"
+                      :items="customers"
+                      @changePage="onChangePage"
+                      :labels="labels"
+                      class="text-center"
+                    ></jw-pagination>
+                  </div>
+                </div>
+              </div>                            
             </div>
           </div>
         </div>
@@ -103,7 +116,15 @@ export default {
           active: true,
         },
       ],
+        labels: {
+        first: "<<",
+        last: ">>",
+        next: ">",
+        previous: "<",
+      },
       bool: false,
+      pageOfItems: [],
+      pageSize: 5,
     };
   },
   methods: {
@@ -114,6 +135,13 @@ export default {
 
     edit(customerId) {
       this.$router.push({ path: `/customers/edit/${customerId}` });
+    },
+      onChangePage(pageOfItems) {
+      this.pageOfItems = pageOfItems;
+      console.log(" items:" + this.pageOfItems);
+    },
+    toggle: function () {
+      this.required = !this.required;
     },
   },
   computed: {

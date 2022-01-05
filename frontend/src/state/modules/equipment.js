@@ -55,7 +55,7 @@ const actions = {
                 return false
             })
 
-        if (res.status === 201) {
+        if (res.status === 200) {
             commit('UPDATE_EQUIPMENT', res.data)
             return true
         }

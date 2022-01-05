@@ -80,18 +80,22 @@ class CustomerController extends Controller
     {
         // validate data from request
         $validated = Validator::make($request->all(), [
-            'name' => 'required|max:60',
+            'name' => 'required',
+            'type_client' => 'required',
+            'phone' => 'required',
+            'duree_contrat' => 'required',
+            'echeance' => 'required',
             'address' => 'required',
-            'email' => 'required|email',
-            'password' => 'required|min:6'
+            'email' => 'required|email|unique:users,email',
         ]);
 
         if ($validated->fails()) {
             return response()->json([$validated->errors()]);
         }
         
-        $customer = Customer::findOrFail($id);
+        $customer = User::findOrFail($id);
         $customer->update($request->all());
+        return response()->json($customer, 200);
         
         return response()->json($customer, 200);
     }
