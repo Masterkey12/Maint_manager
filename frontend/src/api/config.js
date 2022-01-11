@@ -10,7 +10,8 @@ function getToken() {
 }
 
 const token = getToken()
-axios.defaults.baseURL = process.env.VUE_APP_DEFAULT_URL
+// console.log("url : ", process.env.VUE_APP_DEFAULT_URL);
+axios.defaults.baseURL = "http://127.0.0.1:8000/api/";
 axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
 export default axios
