@@ -50,11 +50,10 @@
                     <td>{{ equipment.derniere_intervention  }}</td>
                     <td>{{ equipment.type_intervention }}</td>
                     <td>{{ equipment.prochaine_interv_prev}}</td>
-
-
+      
                     <td class="text-right">
-                      <router-link :to="{ path: `/customer/show/${equipment.id}`}"  class="btn btn-success btn-sm mr-2" >Show</router-link>
-                      <router-link :to="{ path: `/customer/edit/${equipment.id}`}"  class="btn btn-primary btn-sm mr-2" >Edit</router-link>                      
+                      <router-link :to="{ path: `/equipment/show/${equipment.id}`}"  class="btn btn-success btn-sm mr-2" >Show</router-link>
+                      <router-link :to="{ path: `/equipment/edit/${equipment.id}`}"  class="btn btn-primary btn-sm mr-2" >Edit</router-link>                      
                     </td>
                   </tr>
                 </tbody>

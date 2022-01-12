@@ -150,12 +150,12 @@ export default {
         type_interventions: [
         { type_intervention: "preventif", value: "preventive" },
         { type_intervention: "operationnel", value: "operationnel" },
-        { type_intervention: "corrective", value: "corrective" },
+        { type_intervention: "correctif", value: "correctif" },
       ],
         situation_actuelles: [
-        { situation_actuelle: "en panne ", value: "en panne " },
-        { situation_actuelle: "declassé", value: "declassé" },
-        { situation_actuelle: "hors-service", value: "hors-service" },
+        { situation_actuelle: "En panne ", value: "En panne " },
+        { situation_actuelle: "Declassé", value: "Declassé" },
+        { situation_actuelle: "Hors-service", value: "Hors-service" },
       ],
 
       isLoading: false

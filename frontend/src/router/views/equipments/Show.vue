@@ -7,7 +7,7 @@
           <div class="card-body col-md-8 mx-auto">            
               <div class="row">
                 <div class="col-md-12">
-                  <h2 class="card-title nice-title">Customer Details</h2>
+                  <h2 class="card-title nice-title">Equipments Details</h2>
                 </div>
               </div>
               <div class="mt-4">
@@ -19,7 +19,7 @@
                           <h5>Name</h5>
                         </b>
                       </td>
-                      <td>{{ customer.name }}</td>
+                      <td>{{ equipment.designation }}</td>
                     </tr>
 
                     <tr>
@@ -28,7 +28,7 @@
                           <h5>Email</h5>
                         </b>
                       </td>
-                      <td>{{ customer.email }}</td>
+                      <td>{{ equipment.marque }}</td>
                     </tr>
 
                     <tr>
@@ -37,7 +37,7 @@
                           <h5>Adresse</h5>
                         </b>
                       </td>
-                      <td>{{ customer.address }}</td>
+                      <td>{{ equipment.modele }}</td>
                     </tr>
 
                     <tr>
@@ -46,7 +46,7 @@
                           <h5>Telephone</h5>
                         </b>
                       </td>
-                      <td>{{ customer.phone }}</td>
+                      <td>{{ equipment.fabricant }}</td>
                     </tr>
                      <tr>
                       <td>
@@ -54,7 +54,7 @@
                           <h5>Type de client</h5>
                         </b>
                       </td>
-                      <td>{{ customer.type_client }}</td>
+                      <td>{{ equipment.capacite }}</td>
                     </tr>
                      <tr>
                       <td>
@@ -62,7 +62,7 @@
                           <h5>Durée du contrat</h5>
                         </b>
                       </td>
-                      <td>{{ customer.duree_contrat }}</td>
+                      <td>{{ equipment.affectation }}</td>
                     </tr>
                      <tr>
                       <td>
@@ -70,7 +70,31 @@
                           <h5>Echéance</h5>
                         </b>
                       </td>
-                      <td>{{ customer.echeance }}</td>
+                      <td>{{ equipment.situation_actuelle }}</td>
+                    </tr>
+                      <tr>
+                      <td>
+                        <b>
+                          <h5>Echéance</h5>
+                        </b>
+                      </td>
+                      <td>{{ equipment.derniere_intervention }}</td>
+                    </tr>
+                       <tr>
+                      <td>
+                        <b>
+                          <h5>Echéance</h5>
+                        </b>
+                      </td>
+                      <td>{{equipment.type_intervention }}</td>
+                    </tr>
+                       <tr>
+                      <td>
+                        <b>
+                          <h5>Echéance</h5>
+                        </b>
+                      </td>
+                      <td>{{ equipment.prochaine_interv_prev }}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -89,7 +113,7 @@
                         type="submit"
                         class="btn btn-default text-danger"
                         v-if="this.isDeleting === false"
-                        @click="onDelete(customer.id)"
+                        @click="onDelete(equipment.id)"
                       >Delete</button>
                       <button class="btn btn-primary" type="button" v-else disabled>
                         <span
@@ -100,7 +124,7 @@
                         Deleting...
                       </button>
                       <router-link
-                        :to="{path: `/computers/edit/${customer.id}`}"
+                        :to="{path: `/computers/edit/${equipment.id}`}"
                         class="btn btn-info"
                       >Edit</router-link>
                     </div>
@@ -151,13 +175,13 @@ export default {
   },
 
   methods: {
-    ...mapActions(["deleteCustomer", "getCustomerById"]),
+    ...mapActions(["deleteEquipment", "getEquipmentById"]),
     onDelete(id) {
       this.$toasted.clear();
       this.$confirm(
-        `do you want to delete computer ${this.customer.name} ?`
+        `do you want to delete computer ${this.equipment.name} ?`
       ).then(() => {
-        this.deleteCustomer(id).then((deleted) => {
+        this.deleteEquipment(id).then((deleted) => {
           if (deleted) {
             this.isDeleting = true;
             this.$toasted.success("Customer as been deleted");
@@ -171,13 +195,13 @@ export default {
   },
   computed: {
     ...mapState({
-      customer: (state) => state.customer.customer,
+      equipment: (state) => state.equipment.equipment,
     }),
   },
   created() {
-    this.$store.commit('EMPTY_CUSTOMER')
+    this.$store.commit('EMPTY_EQUIPMENT');
     this.isLoading = true
-    this.getCustomerById(this.$route.params.id)
+    this.getEquipmentById(this.$route.params.id)
     .then(loaded => {
       if (loaded) {
         this.isLoading = false

@@ -74,6 +74,15 @@ export default [{
             import ('./views/equipments/Index.vue'),
     },
     {
+        path: '/equipment/show/:id',
+        name: 'ShowEquipment',
+        meta: {
+            authRequired: true,
+        },
+        component: () =>
+            import ('./views/equipments/Show'),
+    },
+    {
         path: '/user/reset-password',
         name: 'ResetPassword',
         meta: {
