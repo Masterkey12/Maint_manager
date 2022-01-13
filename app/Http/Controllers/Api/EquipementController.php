@@ -49,7 +49,6 @@ class EquipementController extends Controller
                 'situation_actuelle' => 'required',
                 'derniere_intervention' => 'required',
                 'type_intervention' => 'required',
-                'prochaine_interv_prev' => 'required',
             ]);
     
             if ($validated->fails()) {

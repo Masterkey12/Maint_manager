@@ -24,7 +24,7 @@ class Equipements extends Migration
             $table->string('situation_actuelle');
             $table->date('derniere_intervention');
             $table->string('type_intervention');
-            $table->date('prochaine_interv_prev');
+            $table->date('prochaine_interv_prev')->nullable();
             
             $table->timestamps();
         });

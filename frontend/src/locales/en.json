@@ -51,16 +51,23 @@
         },
         "customers": {
             "text": "Customers",
-            "list": {
-                "list": "List",
-                "create": "Create"
+            "action": {
+                "list": "Lister",
+                "create": "Créer"
             }
         },
         "equipement": {
             "text": "Equipements",
-            "list": {
-                "list": "List",
-                "create": "Create"
+            "action": {
+                "list": "Lister",
+                "create": "Créer"
+            }
+        },
+        "employees": {
+            "text": "Employés",
+            "action": {
+                "list": "Lister",
+                "create": "Créer"
             }
         }
     }

@@ -74,6 +74,24 @@ export default [{
             import ('./views/equipments/Index.vue'),
     },
     {
+        path: '/employees',
+        name: 'Employees',
+        meta: {
+            authRequired: true,
+        },
+        component: () =>
+            import ('./views/employees/Index.vue'),
+    },
+    {
+        path: '/employees/create',
+        name: 'Employees',
+        meta: {
+            authRequired: true,
+        },
+        component: () =>
+            import ('./views/employees/Create.vue'),
+    },
+    {
         path: '/user/reset-password',
         name: 'ResetPassword',
         meta: {
