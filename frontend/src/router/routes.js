@@ -74,15 +74,6 @@ export default [{
             import ('./views/equipments/Index.vue'),
     },
     {
-        path: '/equipment/show/:id',
-        name: 'ShowEquipment',
-        meta: {
-            authRequired: true,
-        },
-        component: () =>
-            import ('./views/equipments/Show'),
-    },
-    {
         path: '/user/reset-password',
         name: 'ResetPassword',
         meta: {
@@ -90,8 +81,7 @@ export default [{
         },
         component: () =>
             import ('./views/account/change-password'),
-    },
-    {
+    }, {
         path: '/login',
         name: 'login',
         component: () =>
@@ -108,8 +98,7 @@ export default [{
         //         }
         //     },
         // },
-    },
-    {
+    }, {
         path: '/register',
         name: 'Register',
         component: () =>
@@ -126,8 +115,7 @@ export default [{
                 }
             },
         },
-    },
-    {
+    }, {
         path: '/forgot-password',
         name: 'Forgot password',
         component: () =>
@@ -144,8 +132,7 @@ export default [{
                 }
             },
         },
-    },
-    {
+    }, {
         path: '/logout',
         name: 'logout',
         meta: {
