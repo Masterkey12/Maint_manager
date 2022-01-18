@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use App\Models\Personnel;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class PersonnelController extends Controller
 {
@@ -19,15 +21,6 @@ class PersonnelController extends Controller
         
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -38,15 +31,17 @@ class PersonnelController extends Controller
     public function store(Request $request)
     {
         $validated = Validator::make($request->all(), [
-            'nom' => 'required|max:60',
-            'post-nom' => 'required',
-            'prenom' => 'required',
+            'name' => 'required|max:60',
+            'lastname' => 'required',
+            'firstname' => 'required',
             'address' => 'required',
             'phone' => 'required',
-            'etat' => 'required',
-            'conge' => 'required',
-            'type_contrat' => 'required',
-            'email' => 'required|email|unique:personnel,email',
+            'state' => 'required',
+            'vacation' => 'required',
+            'contract_type' => 'required',
+            'email' => 'required|email|unique:personnels,email',
+            'gender' => 'required',
+            'birthday' => 'required'
         ]);
 
         if ($validated->fails()) {
@@ -71,35 +66,26 @@ class PersonnelController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Personnel  $personnel
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Personnel $personnel)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Personnel  $personnel
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Personnel $personnel)
+    public function update(Request $request, $id)
     {
         $validated = Validator::make($request->all(), [
-            'nom' => 'required|max:60',
-            'post-nom' => 'required',
-            'prenom' => 'required',
+            'name' => 'required|max:60',
+            'lastname' => 'required',
+            'firstname' => 'required',
             'address' => 'required',
             'phone' => 'required',
-            'etat' => 'required',
-            'conge' => 'required',
-            'type_contrat' => 'required',
-            'email' => 'required|email|unique:personnel,email',
+            'state' => 'required',
+            'vacation' => 'required',
+            'contract_type' => 'required',
+            'email' => 'required|email',
+            'gender' => 'required',
+            'birthday' => 'required'
         ]);
         if ($validated->fails()) {
             return response()->json([$validated->errors()]);
@@ -119,7 +105,7 @@ class PersonnelController extends Controller
      */
     public function destroy(Personnel $personnel,$id)
     {
-        $customer->findOrFail($id)->delete();
+        $personnel->findOrFail($id)->delete();
         return response()->json(null, 204);
     }
 }
