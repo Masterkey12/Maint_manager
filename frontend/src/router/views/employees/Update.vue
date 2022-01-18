@@ -7,10 +7,9 @@
           <div class="card-body col-md-8 mx-auto">
             <div class="row">
               <div class="col-md-12">
-                <h2 class="card-title nice-title mt-4">Créer un employé</h2>
+                <h2 class="card-title nice-title mt-4">Modifier un employé</h2>
               </div>
             </div>
-
             <div class="mt-4 mb-4">
               <form @submit.prevent="onSubmit">
                 <div class="row mt-4">
@@ -18,7 +17,7 @@
                     <label>Nom </label>
                     <input
                       type="text"
-                      v-model.trim="name"
+                      v-model.trim="employee.name"
                       class="form-control"
                       placeholder="ex: Mumba"
                       style="background-color: #f1f5fa"
@@ -29,9 +28,9 @@
                     <label>Post-nom </label>
                     <input
                       type="text"
-                      v-model.trim="lastname"
+                      v-model.trim="employee.lastname"
                       class="form-control"
-                      placeholder="ex: postnom"
+                      placeholder="ex: Mumba"
                       style="background-color: #f1f5fa"
                       required
                     />
@@ -40,7 +39,7 @@
                     <label>Prenom </label>
                     <input
                       type="text"
-                      v-model.trim="firstname"
+                      v-model.trim="employee.firstname"
                       class="form-control"
                       placeholder="ex: Henry"
                       style="background-color: #f1f5fa"
@@ -54,7 +53,7 @@
                     <label>Email </label>
                     <input
                       type="text"
-                      v-model.trim="email"
+                      v-model.trim="employee.email"
                       class="form-control"
                       placeholder="email"
                       style="background-color: #f1f5fa"
@@ -65,7 +64,7 @@
                     <label>Téléphone </label>
                     <input
                       type="text"
-                      v-model.trim="phone"
+                      v-model.trim="employee.phone"
                       class="form-control"
                       placeholder=""
                       style="background-color: #f1f5fa"
@@ -77,19 +76,23 @@
                 <div class="row mt-3 mb-3">
                   <div class="col">
                     <label for="">Genre</label>
-                    <select v-model="gender" id="" class="form-control">
+                    <select
+                      v-model="employee.gender"
+                      id=""
+                      class="form-control"
+                    >
                       <option
                         v-for="genderOption in genderOptions"
                         :value="genderOption.value"
                         :key="genderOption.id"
                       >
-                        {{ genderOption.label }}
+                        {{ genderOption.value }}
                       </option>
                     </select>
                   </div>
                   <div class="col">
                     <label for="">Etat civil</label>
-                    <select v-model="civilState" id="" class="form-control">
+                    <select v-model="employee.state" id="" class="form-control">
                       <option
                         v-for="stateOption in stateOptions"
                         :value="stateOption.value"
@@ -103,7 +106,7 @@
                     <label>Date de naissance </label>
                     <input
                       type="date"
-                      v-model.trim="birthday"
+                      v-model.trim="employee.birthday"
                       class="form-control"
                       placeholder="Price"
                       style="background-color: #f1f5fa"
@@ -126,14 +129,15 @@
                   </div>
                   <div class="col">
                     <label>Type de contrat </label>
-                    <input
-                      type="text"
-                      v-model.trim="contract_type"
-                      class="form-control"
-                      placeholder="ex: journalier"
-                      style="background-color: #f1f5fa"
-                      required
-                    />
+                    <select v-model="employee.contract_type" id="" class="form-control">
+                      <option
+                        v-for="type_of_contract in contract_types"
+                        :value="type_of_contract.value"
+                        :key="type_of_contract.id"
+                      >
+                        {{ type_of_contract.label }}
+                      </option>
+                    </select>
                   </div>
                 </div>
                 <hr />
@@ -142,7 +146,7 @@
                     <label>vacances </label>
                     <input
                       type="date"
-                      v-model.trim="vacation"
+                      v-model.trim="employee.vacation"
                       class="form-control"
                       placeholder="Price"
                       style="background-color: #f1f5fa"
@@ -152,7 +156,7 @@
                   <div class="col">
                     <label for="">Adresse</label>
                     <textarea
-                      v-model="address"
+                      v-model="employee.address"
                       id=""
                       cols="5"
                       rows="1"
@@ -171,12 +175,6 @@
                     </div>
 
                     <div class="col-md-4 text-right">
-                      <button
-                        class="btn btn-default text-danger"
-                        @click="cancel"
-                      >
-                        <strong>Cancel</strong>
-                      </button>
                       <button
                         v-if="this.isLoading === false"
                         type="submit"
@@ -248,54 +246,35 @@ export default {
         { id: "g1", label: "Homme", value: "M" },
         { id: "g2", label: "Femme", value: "F" },
       ],
-
-      stateOptions: [
-        { id: "st1", label: "Marié", value: "Marié" },
-        { id: "st2", label: "Célibataire", value: "Célibataire" },
+      contract_types: [
+        { id: "ct1", label: "Employée", value: "Employée" },
+        { id: "ct2", label: "Journalier", value: "Journalier" },
+        { id: "ct3", label: "Sous-traitant", value: "Sous-traitant" },
       ],
-
-      name: "",
-      lastname: "",
-      firstname: "",
-      email: "",
-      phone: "",
+      stateOptions: [
+        { id: "st1", label: "Marié", value: "Married" },
+        { id: "st2", label: "Célibataire", value: "Unmaried" },
+      ],
       fonction: "",
-      birthday: "",
-      address: "",
-      gender: "",
-      civilState: "",
-      contract_type: "",
-      vacation: "",
-
+      employee: {},
       isLoading: false,
     };
   },
 
+  computed: {
+    
+  },
   methods: {
-    ...mapActions(["storeEmployee"]),
+    ...mapActions(["getEmployee", "updateEmployee"]),
     onSubmit() {
       this.$toasted.clear();
       this.isLoading = true;
 
-      const data = {
-        name: this.name,
-        lastname: this.lastname,
-        firstname: this.firstname,
-        phone: this.phone,
-        email: this.email,
-        fonction: this.fonction,
-        birthday: this.birthday,
-        address: this.address,
-        gender: this.gender,
-        state: this.civilState,
-        contract_type: this.contract_type,
-        vacation: this.vacation
-      };
-
-      this.storeEmployee(data)
+      console.log("employee : ", this.employee);
+      this.updateEmployee(this.employee)
         .then((response) => {
           if (response) {
-            this.$toasted.success("Employé(e) ajouté avec succès !");
+            this.$toasted.success("Employé(e) modifié avec succès !");
             this.$router.push({ name: "Employees" });
           }
         })
@@ -308,18 +287,19 @@ export default {
           this.isLoading = false;
         });
     },
-
-    cancel() {
-      this.name = "";
-      this.email = "";
-      this.phone = "";
-      this.fonction = "";
-      this.birthday = "";
-      this.address = "";
-    },
   },
   mounted() {
     console.log(process.env.VUE_APP_DEFAULT_URL);
+  },
+  watch: {
+    employee() {
+      console.log("Employee : ", this.employee);
+    }
+  },
+  created() {
+    this.getEmployee(this.$route.params.id).then((response) => {
+      this.employee = response.data;
+    });
   },
 };
 </script>

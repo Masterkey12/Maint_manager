@@ -84,12 +84,21 @@ export default [{
     },
     {
         path: '/employees/create',
-        name: 'Employees',
+        name: 'CreateEmployee',
         meta: {
             authRequired: true,
         },
         component: () =>
             import ('./views/employees/Create.vue'),
+    },
+    {
+        path: '/employees/edit/:id',
+        name: 'EditEmployee',
+        meta: {
+            authRequired: true,
+        },
+        component: () =>
+            import ('./views/employees/Update.vue'),
     },
     {
         path: '/user/reset-password',

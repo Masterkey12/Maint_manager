@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import customer from './modules/customer'
 import equipment from './modules/equipment'
 import user from './modules/user'
+import employee from './modules/employee';
 
 import modules from './modules'
 
@@ -13,7 +14,8 @@ const store = new Vuex.Store({
         ...modules,
         customer,
         equipment,
-        user
+        user,
+        employee
     },
     // Enable strict mode in development to get a warning
     // when mutating state outside of a mutation.

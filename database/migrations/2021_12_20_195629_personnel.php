@@ -13,18 +13,20 @@ class Personnel extends Migration
      */
     public function up()
     {
-        Schema::create('personnel', function (Blueprint $table){
-        $table->id();
-        $table->string('nom');
-        $table->string('post-nom');
-        $table->string('prenom');
-        $table->string('email')->unique();
-        $table->string('address');
-        $table->string('phone');
-        $table->string('etat');
-        $table->date('conge');
-        $table->string('type_contrat');
-        $table->timestamps();
+        Schema::create('personnels', function (Blueprint $table){
+            $table->id();
+            $table->string('name');
+            $table->string('lastname');
+            $table->string('firstname');
+            $table->string('email')->unique();
+            $table->string('address');
+            $table->string('phone');
+            $table->string('state');
+            $table->date('vacation');
+            $table->string('contract_type');
+            $table->date('birthday')->nullable();
+            $table->string('gender', 1);
+            $table->timestamps();
         });
 
     }
