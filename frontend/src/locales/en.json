@@ -64,7 +64,7 @@
             }
         },
         "employees": {
-            "text": "Employés",
+            "text": "Personnels",
             "action": {
                 "list": "Lister",
                 "create": "Créer"
