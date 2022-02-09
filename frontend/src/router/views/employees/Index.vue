@@ -7,7 +7,7 @@
           <div class="card-body">
             <div class="row">
               <div class="col-md-6">
-                <h2 class="card-title nice-title">Liste des employés</h2>
+                <h2 class="card-title nice-title">Liste des personnels</h2>
               </div>
               <div class="col-md-6 text-right">
                 <router-link
@@ -44,8 +44,8 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="employee in employees" :key="employee.id">
-                    <th scope="row">{{ employee.id }}</th>
+                  <tr v-for="(employee, index) in employees" :key="employee.id">
+                    <th scope="row">{{ index + 1 }}</th>
                     <td>
                       {{
                         employee.name +
@@ -88,6 +88,10 @@
                             })
                           "
                           >Afficher</b-dropdown-item
+                        >
+                        <b-dropdown-item
+                          @click="deletePersonal(employee.id)"
+                          >Supprimer</b-dropdown-item
                         >
                       </b-dropdown>
                     </td>
@@ -178,13 +182,16 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["getEmployees"]),
-    show(customerId) {
-      this.$router.push({ path: `/customers/show/${customerId}` });
-    },
-
-    edit(customerId) {
-      this.$router.push({ path: `/customers/edit/${customerId}` });
+    ...mapActions(["getEmployees", "deleteEmployee"]),
+    deletePersonal(id) {
+      this.$store.dispatch("deleteEmployee", id)
+      // this.deleteEmployee(id)
+      //   .then(() => {
+      //     console.log("deleted");
+      //   })
+      //   .finally(() => {
+      //     console.log("done");
+      //   })
     },
     onChangePage(pageOfItems) {
       this.pageOfItems = pageOfItems;

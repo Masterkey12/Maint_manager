@@ -17,7 +17,7 @@
                     <label>Nom </label>
                     <input
                       type="text"
-                      v-model.trim="employee.name"
+                      v-model="emp.name"
                       class="form-control"
                       placeholder="ex: Mumba"
                       style="background-color: #f1f5fa"
@@ -76,11 +76,7 @@
                 <div class="row mt-3 mb-3">
                   <div class="col">
                     <label for="">Genre</label>
-                    <select
-                      v-model="employee.gender"
-                      id=""
-                      class="form-control"
-                    >
+                    <select v-model="employee.gender" id="" class="form-control">
                       <option
                         v-for="genderOption in genderOptions"
                         :value="genderOption.value"
@@ -129,15 +125,14 @@
                   </div>
                   <div class="col">
                     <label>Type de contrat </label>
-                    <select v-model="employee.contract_type" id="" class="form-control">
-                      <option
-                        v-for="type_of_contract in contract_types"
-                        :value="type_of_contract.value"
-                        :key="type_of_contract.id"
-                      >
-                        {{ type_of_contract.label }}
-                      </option>
-                    </select>
+                    <input
+                      type="text"
+                      v-model.trim="employee.contract_type"
+                      class="form-control"
+                      placeholder="ex: journalier"
+                      style="background-color: #f1f5fa"
+                      required
+                    />
                   </div>
                 </div>
                 <hr />
@@ -247,9 +242,9 @@ export default {
         { id: "g2", label: "Femme", value: "F" },
       ],
       contract_types: [
-        { id: "ct1", label: "Employée", value: "Employée" },
-        { id: "ct2", label: "Journalier", value: "Journalier" },
-        { id: "ct3", label: "Sous-traitant", value: "Sous-traitant" },
+        { id: "ct1", label: "Employée", value: "Employée"},
+        { id: "ct1", label: "Journalier"},
+        { id: "ct1", label: "Sous-traitant"}
       ],
       stateOptions: [
         { id: "st1", label: "Marié", value: "Married" },
@@ -257,12 +252,15 @@ export default {
       ],
       fonction: "",
       employee: {},
+      emp: {},
       isLoading: false,
     };
   },
 
   computed: {
-    
+    // ...mapState({
+    //   employee: (state) => state.employee.employee
+    // })
   },
   methods: {
     ...mapActions(["getEmployee", "updateEmployee"]),
@@ -270,7 +268,7 @@ export default {
       this.$toasted.clear();
       this.isLoading = true;
 
-      console.log("employee : ", this.employee);
+      console.log("employee on update : ", this.employee);
       this.updateEmployee(this.employee)
         .then((response) => {
           if (response) {
@@ -291,14 +289,19 @@ export default {
   mounted() {
     console.log(process.env.VUE_APP_DEFAULT_URL);
   },
-  watch: {
-    employee() {
-      console.log("Employee : ", this.employee);
-    }
-  },
   created() {
-    this.getEmployee(this.$route.params.id).then((response) => {
-      this.employee = response.data;
+    // this.getEmployee(this.$route.params.id)
+    // .then((response) => {
+    //     this.employee = response.data;
+    // });
+
+    this.$store.dispatch("getEmployee", this.$route.params.id)
+    .then((response) => {
+      console.log("response : ", response.data);
+      this.emp = response.data;
+    })
+    .finally(() => {
+      console.log("employee : ", this.employee);
     });
   },
 };

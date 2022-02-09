@@ -79,7 +79,7 @@ const actions = {
                 .delete(employeeId)
                 .then((response) => {
                     if (response.status === 204) {
-                        commit("DELETE_EMPLOYEE", response.data.id);
+                        commit("DELETE_EMPLOYEE", employeeId);
                         resolve(response);
                     }
                     eject(response);
@@ -101,7 +101,7 @@ const mutations = {
             state.employees.splice(index, 1, employee);
         }
     },
-    DELETE_EMPLOYEE: (state, employeeId) => state.employees.filter((employee) => employee.id !== employeeId)
+    DELETE_EMPLOYEE: (state, employeeId) => state.employee.filter((employee) => employee.id !== employeeId)
 }
 
 export default {
