@@ -17,7 +17,7 @@
                     <label>Nom </label>
                     <input
                       type="text"
-                      v-model="emp.name"
+                      v-model="employee.name"
                       class="form-control"
                       placeholder="ex: Mumba"
                       style="background-color: #f1f5fa"
@@ -224,13 +224,13 @@ export default {
   data() {
     return {
       customers: [],
-      title: "Customers",
+      title: "Employees",
       items: [
         {
           text: "Dashboard",
         },
         {
-          text: "Customers",
+          text: "Employees",
         },
         {
           text: "Create",
@@ -252,15 +252,11 @@ export default {
       ],
       fonction: "",
       employee: {},
-      emp: {},
       isLoading: false,
     };
   },
 
   computed: {
-    // ...mapState({
-    //   employee: (state) => state.employee.employee
-    // })
   },
   methods: {
     ...mapActions(["getEmployee", "updateEmployee"]),
@@ -290,18 +286,9 @@ export default {
     console.log(process.env.VUE_APP_DEFAULT_URL);
   },
   created() {
-    // this.getEmployee(this.$route.params.id)
-    // .then((response) => {
-    //     this.employee = response.data;
-    // });
-
-    this.$store.dispatch("getEmployee", this.$route.params.id)
+    this.getEmployee(this.$route.params.id)
     .then((response) => {
-      console.log("response : ", response.data);
-      this.emp = response.data;
-    })
-    .finally(() => {
-      console.log("employee : ", this.employee);
+        this.employee = response.data;
     });
   },
 };

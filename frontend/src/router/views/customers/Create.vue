@@ -14,7 +14,7 @@
             <div class="mt-4 mb-4">
               <form @submit.prevent="onSubmit">
                 <div class="row mt-4">
-                  <div class="col">
+                  <div class="col-6">
                     <label>Name </label>
                     <input
                       type="text"
@@ -25,7 +25,7 @@
                       required
                     />
                   </div>
-                  <div class="col">
+                  <div class="col-6">
                     <label>Email </label>
                     <input
                       type="text"
@@ -37,16 +37,17 @@
                     />
                   </div>
                   <div class="col">
-                    <label>Adresse </label>
+                    <label>Telephone </label>
                     <input
                       type="text"
-                      v-model.trim="forms.address"
+                      v-model.trim="forms.phone"
                       class="form-control"
-                      placeholder="Adresse"
+                      placeholder="telephone"
                       style="background-color: #f1f5fa"
                       required
                     />
                   </div>
+                  
                   <div class="col">
                     <label>Mot de passe </label>
                     <input
@@ -73,17 +74,6 @@
 
                 <div class="row mt-3 mb-4">
                   <div class="col">
-                    <label>Telephone </label>
-                    <input
-                      type="text"
-                      v-model.trim="forms.phone"
-                      class="form-control"
-                      placeholder="telephone"
-                      style="background-color: #f1f5fa"
-                      required
-                    />
-                  </div>
-                  <div class="col">
                     <label>Durée du contrat </label>
                     <input
                       type="text"
@@ -101,6 +91,17 @@
                       v-model.trim="forms.echeance"
                       class="form-control"
                       placeholder="Price"
+                      style="background-color: #f1f5fa"
+                      required
+                    />
+                  </div>
+                  <div class="col">
+                    <label>Adresse </label>
+                    <input
+                      type="text"
+                      v-model.trim="forms.address"
+                      class="form-control"
+                      placeholder="Adresse"
                       style="background-color: #f1f5fa"
                       required
                     />

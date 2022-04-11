@@ -69,6 +69,9 @@
                 "list": "Lister",
                 "create": "Créer"
             }
+        },
+        "finances": {
+            "text": "Finances"
         }
     }
 }

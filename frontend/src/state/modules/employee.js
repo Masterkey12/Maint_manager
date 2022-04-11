@@ -71,10 +71,10 @@ const actions = {
                     eject(err)
                 })
         })
-    }, 
+    },
 
     deleteEmployee({ commit }, employeeId) {
-        return new Promise((resolve, eject) => {
+        return new Promise((resolve, reject) => {
             employeeApi
                 .delete(employeeId)
                 .then((response) => {
@@ -82,10 +82,10 @@ const actions = {
                         commit("DELETE_EMPLOYEE", employeeId);
                         resolve(response);
                     }
-                    eject(response);
+                    reject(response);
                 })
                 .catch((err) => {
-                    eject(err)
+                    reject(err);
                 })
         })
     }
@@ -101,7 +101,13 @@ const mutations = {
             state.employees.splice(index, 1, employee);
         }
     },
-    DELETE_EMPLOYEE: (state, employeeId) => state.employee.filter((employee) => employee.id !== employeeId)
+    DELETE_EMPLOYEE: (state, employeeId) => {
+        const index = state.employees.findIndex((employee) => employee.id === employeeId);
+        console.log("index : ", index);
+        if (index !== -1) {
+            state.employees.splice(index, 1);
+        }
+    }
 }
 
 export default {
@@ -109,5 +115,3 @@ export default {
     actions,
     mutations
 }
-   
-

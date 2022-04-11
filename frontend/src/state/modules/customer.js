@@ -8,18 +8,23 @@ const state = {
 const getters = {}
 
 const actions = {
-    async getCustomers({ commit }) {
-        const res = await customerApi.all()
-            .catch(err => {
-                console.log(err)
-                return false
-            })
-
-        if (res.status === 200) {
-            commit('SET_CUSTOMERS', res.data)
-            return true
-        }
+    getCustomers({ commit }) {
+        return new Promise((resolve, eject) => {
+            customerApi
+                .all()
+                .then((response) => {
+                    if (response.status === 200) {
+                        commit("SET_CUSTOMERS", response.data);
+                        resolve(response);
+                    }
+                    eject(response);
+                })
+                .catch((err) => {
+                    eject(err);
+                });
+        })
     },
+
 
     async createCustomer({ commit }, customer) {
         const res = await customerApi.store(customer)

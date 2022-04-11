@@ -62,5 +62,11 @@ export const menuItems = [{
                 parentId: 5
             }
         ]
-    }
+    },
+    {
+        id: 6,
+        label: "menuitems.finances.text",
+        icon: "bx-wallet",
+        link: '/'
+    },
 ];

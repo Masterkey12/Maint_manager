@@ -81,14 +81,14 @@
                           "
                           >Modifier</b-dropdown-item
                         >
-                        <b-dropdown-item
+                        <!-- <b-dropdown-item
                           @click="
                             $router.push({
                               path: `/employees/show/${employee.id}`,
                             })
                           "
                           >Afficher</b-dropdown-item
-                        >
+                        > -->
                         <b-dropdown-item
                           @click="deletePersonal(employee.id)"
                           >Supprimer</b-dropdown-item
@@ -103,10 +103,9 @@
                   src="../../../assets/images/animations/empty_state.gif"
                   alt=""
                 />
-                <h3 class="text-center">No computers</h3>
+                <h3 class="text-center">Pas d'employés enregistré</h3>
                 <p class="mt-2">
-                  The list of computers is empty, no computer has been added
-                  yet.
+                 La liste des employés est vide.
                 </p>
               </div>
               <div class="row mb-4">
@@ -184,14 +183,11 @@ export default {
   methods: {
     ...mapActions(["getEmployees", "deleteEmployee"]),
     deletePersonal(id) {
-      this.$store.dispatch("deleteEmployee", id)
-      // this.deleteEmployee(id)
-      //   .then(() => {
-      //     console.log("deleted");
-      //   })
-      //   .finally(() => {
-      //     console.log("done");
-      //   })
+      this.deleteEmployee(id)
+        .then(() => {
+        })
+        .finally(() => {
+        });
     },
     onChangePage(pageOfItems) {
       this.pageOfItems = pageOfItems;
@@ -205,12 +201,6 @@ export default {
     ...mapState({
       employees: (state) => state.employee.employees,
     }),
-    // employees: function() {
-    //     return [
-    //             {id: 1, name: "Employee 1 Employee 1 Employee 1", address: "Kipushi", email: "employee1@gmail.com", phone: "+0000000000", function: "RH", birthday: "28-10-1997"},
-    //             {id: 2, name: "Employee 2 Employee 2 Employee 2", address: "Kipushi", email: "employee2@gmail.com", phone: "+0000000000", function: "RH", birthday: "28-10-1997"}
-    //         ];
-    // }
   },
   created() {
     this.isLoading = true;

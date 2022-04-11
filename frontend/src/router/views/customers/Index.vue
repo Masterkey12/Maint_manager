@@ -47,8 +47,40 @@
 
 
                     <td class="text-right">
-                      <router-link :to="{ path: `/customer/show/${customer.id}`}"  class="btn btn-success btn-sm mr-2" >Show</router-link>
-                      <router-link :to="{ path: `/customer/edit/${customer.id}`}"  class="btn btn-primary btn-sm mr-2" >Edit</router-link>                      
+                      <b-dropdown
+                        class="card-drop"
+                        variant="white"
+                        right
+                        toggle-class="p-0"
+                      >
+                        <template v-slot:button-content>
+                          <i class="mdi mdi-dots-horizontal font-size-18"></i>
+                        </template>
+                        <!-- <b-dropdown-item
+                          @click="
+                            $router.push({
+                              path: `/employees/edit/${employee.id}`,
+                            })
+                          "
+                          >Modifier</b-dropdown-item
+                        > -->
+                        <b-dropdown-item
+                          @click="
+                            $router.push({
+                              path: `/customer/show/${customer.id}`,
+                            })
+                          "
+                          >Afficher</b-dropdown-item
+                        >
+                        <b-dropdown-item
+                          @click="$router.push({
+                            path: `/customer/edit/${customer.id}`
+                          })"
+                          >Modifier</b-dropdown-item
+                        >
+                      </b-dropdown>
+                      <!-- <router-link :to="{ path: `/customer/show/${customer.id}`}"  class="btn btn-success btn-sm mr-2" >Show</router-link> -->
+                      <!-- <router-link :to="{ path: `/customer/edit/${customer.id}`}"  class="btn btn-primary btn-sm mr-2" >Edit</router-link>                       -->
                     </td>
                   </tr>
                 </tbody>
